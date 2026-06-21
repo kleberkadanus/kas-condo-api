@@ -82,7 +82,7 @@ async def seed():
             db.add(morador)
 
             await db.commit()
-            print(f"Condominio demo criado (id={condo.id})")
+            print("Condominio demo criado")
             print("Sindico: sindico@demo.app / Demo@123")
             print("Morador: morador@demo.app / Demo@123 (Apt 101)")
         else:
