@@ -1,4 +1,4 @@
-"""
+﻿"""
 Script de seed inicial: cria o superadmin e um condomínio de demonstração.
 Executar: python3 -m app.services.seed
 """
@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from database import engine, create_tables
 from sqlmodel import Session, SQLModel, select
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlmodel.ext.asyncio.session import AsyncSession
 from models import User, Condo, UserRole, Amenity, AmenityType, Camera
 from passlib.context import CryptContext
 

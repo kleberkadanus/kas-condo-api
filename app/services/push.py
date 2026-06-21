@@ -1,10 +1,10 @@
-"""
+﻿"""
 Serviço de push notifications via Expo Push API.
 Não requer Firebase configurado pelo usuário — usa a infraestrutura do Expo.
 """
 import httpx
 import logging
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlmodel import select
 from models import PushToken, User
 
