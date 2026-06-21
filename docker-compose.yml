@@ -1,0 +1,46 @@
+version: "3.9"
+services:
+  kas-condo-api:
+    build: .
+    container_name: kas-condo-api
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    environment:
+      DATABASE_URL: postgresql+asyncpg://kas:kas123@kas-condo-db:5432/kas_condo
+      SECRET_KEY: ${SECRET_KEY:-kas-condo-production-secret-change-me}
+      VPS_HOST: ${VPS_HOST:-104.234.200.93}
+      UPLOAD_DIR: /app/uploads/boletos
+    volumes:
+      - boleto_uploads:/app/uploads
+    depends_on:
+      kas-condo-db:
+        condition: service_healthy
+    networks:
+      - kas-net
+
+  kas-condo-db:
+    image: postgres:16-alpine
+    container_name: kas-condo-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: kas
+      POSTGRES_PASSWORD: kas123
+      POSTGRES_DB: kas_condo
+    volumes:
+      - kas_condo_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U kas -d kas_condo"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - kas-net
+
+volumes:
+  kas_condo_data:
+  boleto_uploads:
+
+networks:
+  kas-net:
+    external: false
