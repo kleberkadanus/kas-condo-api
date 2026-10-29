@@ -11,7 +11,7 @@ services:
     environment:
       DATABASE_URL: postgresql+asyncpg://kas:***@kas-condo-db:5432/kas_condo
       SECRET_KEY: ${SECRET_KEY:-kas-condo-production-secret-change-me}
-      VPS_HOST: ${VPS_HOST:-104.234.200.93}
+      VPS_HOST: ${VPS_HOST:-186.241.176.50}
       UPLOAD_DIR: /app/uploads/boletos
     volumes:
       - ./app:/app
